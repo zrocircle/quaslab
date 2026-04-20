@@ -1,0 +1,116 @@
+{
+  "papers": [
+    {
+      "id": "paper-001",
+      "title": "AI-Native Software Development Lifecycle: A Framework for Autonomous Code Generation and Verification",
+      "authors": "Janghwan Kim, Minjae Park, Subin Lee",
+      "venue": "IEEE Transactions on Software Engineering",
+      "year": 2024,
+      "doi": "10.1109/TSE.2024.XXXXXX",
+      "abstract": "We propose an AI-native SDLC framework that integrates large language models into every phase of software development, from requirements elicitation to automated verification.",
+      "tags": ["AI-Native SDLC", "LLM", "Code Generation"],
+      "fileUrl": "/assets/papers/paper-001.pdf"
+    },
+    {
+      "id": "paper-002",
+      "title": "Reinforcement Learning-Based Test Case Prioritization for Continuous Integration",
+      "authors": "Janghwan Kim, Hyunwoo Cho",
+      "venue": "ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA)",
+      "year": 2024,
+      "doi": "10.1145/XXXXXXX",
+      "abstract": "A novel RL-based approach to dynamically prioritize test cases in CI pipelines, reducing average feedback time by 42% while maintaining fault detection rates.",
+      "tags": ["Reinforcement Learning", "Testing", "CI/CD"],
+      "fileUrl": "/assets/papers/paper-002.pdf"
+    },
+    {
+      "id": "paper-003",
+      "title": "Embedding AI Oracles in Software Verification and Validation Processes",
+      "authors": "Janghwan Kim, Eunji Song, Minjae Park",
+      "venue": "Journal of Systems and Software",
+      "year": 2023,
+      "doi": "10.1016/j.jss.2023.XXXXXX",
+      "abstract": "This paper presents AI-embedded V&V methodology that uses transformer-based models as software oracles for automated regression testing and specification conformance checking.",
+      "tags": ["AI V&V", "Software Verification", "AI Oracle"],
+      "fileUrl": "/assets/papers/paper-003.pdf"
+    }
+  ],
+  "books": [
+    {
+      "id": "book-001",
+      "title": "소프트웨어 품질보증의 이해",
+      "authors": "김장환",
+      "publisher": "홍익대학교 출판부",
+      "year": 2023,
+      "isbn": "979-11-XXXXX-XX-X",
+      "description": "소프트웨어 품질보증(SQA)의 이론과 실습을 다루는 교재로, AI 기반 테스팅 기법을 포함한 최신 V&V 방법론을 소개한다.",
+      "tags": ["SQA", "Software Testing", "교재"],
+      "fileUrl": "/assets/books/book-001.pdf"
+    },
+    {
+      "id": "book-002",
+      "title": "AI 시대의 소프트웨어 공학",
+      "authors": "김장환, 이수빈",
+      "publisher": "정보문화사",
+      "year": 2022,
+      "isbn": "979-11-XXXXX-XX-X",
+      "description": "대규모 언어 모델과 AI 도구를 활용한 현대 소프트웨어 개발 방법론을 체계적으로 정리한 전문서.",
+      "tags": ["AI", "소프트웨어 공학", "LLM"],
+      "fileUrl": "/assets/books/book-002.pdf"
+    }
+  ],
+  "awards": [
+    {
+      "id": "award-001",
+      "title": "Best Paper Award",
+      "organization": "Korea Software Congress (KSC) 2024",
+      "year": 2024,
+      "description": "AI-Native SDLC 프레임워크 연구로 한국소프트웨어종합학술대회 최우수논문상 수상.",
+      "tags": ["Best Paper", "KSC 2024"],
+      "fileUrl": "/assets/awards/award-001.pdf"
+    },
+    {
+      "id": "award-002",
+      "title": "우수 강의상",
+      "organization": "홍익대학교",
+      "year": 2023,
+      "description": "2023학년도 2학기 소프트웨어 품질보증 강의에서 학생 만족도 최우수 평가를 받아 수상.",
+      "tags": ["강의상", "홍익대학교"],
+      "fileUrl": "/assets/awards/award-002.pdf"
+    },
+    {
+      "id": "award-003",
+      "title": "산학협력 우수 연구자상",
+      "organization": "한국연구재단",
+      "year": 2022,
+      "description": "산업계와의 협력 연구 실적 및 기술 이전 성과를 인정받아 NRF 산학협력 우수연구자로 선정.",
+      "tags": ["산학협력", "NRF"],
+      "fileUrl": "/assets/awards/award-003.pdf"
+    }
+  ],
+  "patents": [
+    {
+      "id": "patent-001",
+      "title": "강화학습 기반 소프트웨어 테스트 케이스 자동 생성 및 우선순위화 방법 및 시스템",
+      "inventors": "김장환, 조현우",
+      "registrationNumber": "10-XXXX-XXXXXXX",
+      "applicationDate": "2023-04-15",
+      "registrationDate": "2024-02-28",
+      "status": "등록",
+      "abstract": "강화학습 에이전트를 이용하여 소프트웨어 변경 이력 및 커버리지 데이터를 분석하고, 결함 검출 확률이 높은 테스트 케이스를 자동으로 생성·우선순위화하는 방법 및 시스템.",
+      "tags": ["강화학습", "테스트 자동화", "KR 등록"],
+      "fileUrl": "/assets/patents/patent-001.pdf"
+    },
+    {
+      "id": "patent-002",
+      "title": "대규모 언어 모델을 이용한 소프트웨어 명세 적합성 검증 장치 및 방법",
+      "inventors": "김장환, 송은지, 박민재",
+      "registrationNumber": "10-XXXX-XXXXXXX",
+      "applicationDate": "2024-01-10",
+      "registrationDate": null,
+      "status": "출원",
+      "abstract": "LLM을 소프트웨어 오라클로 활용하여 요구사항 명세서와 구현 코드 간의 적합성을 자동으로 검증하는 장치 및 방법.",
+      "tags": ["LLM", "명세 검증", "KR 출원"],
+      "fileUrl": "/assets/patents/patent-002.pdf"
+    }
+  ]
+}
