@@ -6,6 +6,7 @@ const navItems = [
   { label: 'PI', to: '/pi' },
   { label: 'Research', to: '/research' },
   { label: 'Archive', to: '/archive' },
+  { label: 'Gallery', to: '/gallery' },
 ]
 
 export default function Navbar() {

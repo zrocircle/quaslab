@@ -28,6 +28,7 @@ export default function Footer() {
                 { label: 'PI (About)', to: '/pi' },
                 { label: 'Research', to: '/research' },
                 { label: 'Archive', to: '/archive' },
+                { label: 'Gallery', to: '/gallery' },
               ].map((item) => (
                 <li key={item.to}>
                   <Link

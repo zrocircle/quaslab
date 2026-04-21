@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import PI from './pages/PI'
 import Research from './pages/Research'
 import Archive from './pages/Archive'
+import Gallery from './pages/Gallery'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/pi" element={<PI />} />
             <Route path="/research" element={<Research />} />
             <Route path="/archive" element={<Archive />} />
+            <Route path="/gallery" element={<Gallery />} />
           </Routes>
         </div>
         <Footer />

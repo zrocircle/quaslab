@@ -1,0 +1,50 @@
+[
+  {
+    "id": "gallery-001",
+    "category": "lab",
+    "title": "QUAS Lab 연구실",
+    "description": "홍익대학교 QUAS Lab 연구실 전경",
+    "year": 2024,
+    "imageUrl": "/assets/gallery/lab-001.jpg"
+  },
+  {
+    "id": "gallery-002",
+    "category": "conference",
+    "title": "ISSTA 2024 발표",
+    "description": "ACM ISSTA 2024 학회 논문 발표 현장",
+    "year": 2024,
+    "imageUrl": "/assets/gallery/conf-001.jpg"
+  },
+  {
+    "id": "gallery-003",
+    "category": "conference",
+    "title": "KSC 2024 수상",
+    "description": "한국소프트웨어종합학술대회 최우수논문상 수상",
+    "year": 2024,
+    "imageUrl": "/assets/gallery/conf-002.jpg"
+  },
+  {
+    "id": "gallery-004",
+    "category": "seminar",
+    "title": "랩 세미나",
+    "description": "2024년 정기 연구 세미나",
+    "year": 2024,
+    "imageUrl": "/assets/gallery/seminar-001.jpg"
+  },
+  {
+    "id": "gallery-005",
+    "category": "lab",
+    "title": "랩 미팅",
+    "description": "주간 연구 미팅",
+    "year": 2023,
+    "imageUrl": "/assets/gallery/lab-002.jpg"
+  },
+  {
+    "id": "gallery-006",
+    "category": "event",
+    "title": "졸업 축하",
+    "description": "2023년 졸업생 축하 행사",
+    "year": 2023,
+    "imageUrl": "/assets/gallery/event-001.jpg"
+  }
+]
