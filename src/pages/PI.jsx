@@ -1,58 +1,53 @@
 const education = [
   {
-    degree: 'Ph.D. in Computer Science',
-    institution: 'KAIST (한국과학기술원)',
-    period: '2006 – 2012',
-    detail: '소프트웨어 공학 / 자동화 테스팅',
+    degree: 'Ph.D. Candidate in Software Engineering (박사수료)',
+    institution: 'Hongik University (홍익대학교)',
+    period: '2022.3 – 2027.2 (예정)',
+    detail: '소프트웨어 공학 / 인공지능 소프트웨어 검증 / 강화학습 소프트웨어 검증',
   },
   {
-    degree: 'M.S. in Computer Science',
-    institution: 'KAIST (한국과학기술원)',
-    period: '2004 – 2006',
-    detail: '프로그램 분석',
+    degree: 'M.S. in in Software Engineering (공학석사)',
+    institution: 'Hongik University (홍익대학교)',
+    period: '2020.3 – 2022.2',
+    detail: '소프트웨어 가시화',
   },
   {
     degree: 'B.S. in Computer Science',
-    institution: '서울대학교',
-    period: '2000 – 2004',
+    institution: 'Idaho State University',
+    period: '2013.8 – 2019.12',
     detail: '',
   },
 ]
 
 const career = [
   {
-    role: '교수 (부교수)',
+    role: '외래교수',
     org: '홍익대학교 소프트웨어융합학과',
-    period: '2016 – 현재',
-    detail: 'QUAS Lab 운영, 학부·대학원 강의, 산학협력 연구 수행',
+    period: '2024.3 – Current',
+    detail: 'SELAB 방장, QUAS Lab 운영, 학부 강의, 산학 연구 수행',
   },
   {
-    role: '선임연구원',
-    org: 'ETRI (한국전자통신연구원)',
-    period: '2013 – 2016',
-    detail: '임베디드 소프트웨어 신뢰성 검증 기술 연구',
+    role: '부팀장',
+    org: '메타버스융합SW아카데미사업단 (Metaverse Convergence SW Academy, MSWA)',
+    period: '2026.3 – Current',
+    detail: '메타버스 SW 인재 양성 교육과정 개발 및 운영, 산학 협력 연구 프로젝트 수행',
   },
-  {
-    role: 'Postdoctoral Researcher',
-    org: 'University of Texas at Austin',
-    period: '2012 – 2013',
-    detail: 'Automated Software Testing Lab, Prof. Miryung Kim 지도',
-  },
+
 ]
 
 const courses = [
-  '소프트웨어 품질보증 (SQA)',
-  '소프트웨어 공학',
-  '인공지능과 소프트웨어',
-  '오픈소스 소프트웨어',
-  '고급 소프트웨어 테스팅 (대학원)',
+  '자료구조 (Data Structures)',
+  '파이썬 프로그래밍 입문/응용 (Python Programming)',
+  '웹프로그래밍 (Web Programming)',
+  '안드로이드 프로그래밍 (Android Programming)',
+  '창의공학설계입문 (Creative Engineering Design)',
 ]
 
 const links = [
-  { label: 'Google Scholar', href: 'https://scholar.google.com', icon: 'S' },
+  { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=GuK7icsAAAAJ&hl=ko', icon: 'S' },
   { label: 'DBLP', href: 'https://dblp.org', icon: 'D' },
-  { label: 'GitHub', href: 'https://github.com', icon: 'G' },
-  { label: 'Email', href: 'mailto:janghwan@hongik.ac.kr', icon: '@' },
+  { label: 'GitHub', href: 'https://github.com/zrocircle', icon: 'G' },
+  { label: 'Email', href: 'mailto:lentoconstante@hongik.ac.kr', icon: '@' },
 ]
 
 export default function PI() {
@@ -67,12 +62,12 @@ export default function PI() {
           <div>
             <h1 className="section-title mb-1">김장환 (Janghwan Kim)</h1>
             <p className="text-indigo-600 font-medium mb-3">
-              부교수, 홍익대학교 소프트웨어융합학과
+              외래교수, 홍익대학교 소프트웨어융합학과 / 부팀장, 메타버스융합SW아카데미사업단 
             </p>
             <p className="text-slate-600 text-sm leading-relaxed max-w-2xl mb-5">
-              AI-Native 소프트웨어 공학, 자동화 소프트웨어 테스팅, 강화학습 기반 SE 자동화를
-              연구합니다. 소프트웨어 품질보증(SQA) 분야에서 10년 이상의 연구 경력을 보유하고 있으며,
-              LLM과 AI를 소프트웨어 개발 전 주기에 내재화하는 차세대 방법론을 탐구합니다.
+              AI-Native 소프트웨어 공학, 자동화 소프트웨어 테스팅, 강화학습 기반 SW 검증 자동화를
+              연구합니다. 소프트웨어 품질보증(SQA) 분야에서 7년 이상의 연구 경력을 보유하고 있으며,
+              양자 컴퓨팅 기반 소프트웨어를 검증하는 것에 대한 연구를 진행하고 있습니다.
             </p>
             <div className="flex flex-wrap gap-2">
               {links.map((l) => (
@@ -98,7 +93,7 @@ export default function PI() {
           <div className="lg:col-span-2 space-y-12">
             {/* Education */}
             <section>
-              <h2 className="section-title text-xl">학력</h2>
+              <h2 className="section-title text-xl">Education</h2>
               <div className="section-divider" />
               <div className="space-y-5">
                 {education.map((e) => (
@@ -117,7 +112,7 @@ export default function PI() {
 
             {/* Career */}
             <section>
-              <h2 className="section-title text-xl">주요 경력</h2>
+              <h2 className="section-title text-xl">Career</h2>
               <div className="section-divider" />
               <div className="relative border-l-2 border-slate-100 pl-6 space-y-7">
                 {career.map((c) => (
@@ -134,13 +129,13 @@ export default function PI() {
 
             {/* Research Interests */}
             <section>
-              <h2 className="section-title text-xl">연구 관심 분야</h2>
+              <h2 className="section-title text-xl">Research Interests</h2>
               <div className="section-divider" />
               <div className="flex flex-wrap gap-2">
                 {[
                   'AI-Native SDLC',
                   'AI-Embedded V&V',
-                  'Reinforcement Learning for SE',
+                  'Reinforcement Learning Software Validation',
                   'Automated Software Testing',
                   'LLM-based Code Generation',
                   'Software Quality Assurance',
@@ -166,8 +161,8 @@ export default function PI() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <a href="mailto:janghwan@hongik.ac.kr" className="hover:text-indigo-600 transition-colors break-all">
-                    janghwan@hongik.ac.kr
+                  <a href="mailto:lentoconstante@hongik.ac.kr" className="hover:text-indigo-600 transition-colors break-all">
+                    lentoconstante@hongik.ac.kr
                   </a>
                 </li>
                 <li className="flex gap-3">
@@ -176,7 +171,7 @@ export default function PI() {
                       d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span>홍익대학교 산학협력관<br />서울특별시 마포구 와우산로 94</span>
+                  <span>홍익대학교 소프트웨어융합학과<br />세종특별자치시 조치원읍 세종로 2639 D424 </span>
                 </li>
               </ul>
             </div>
