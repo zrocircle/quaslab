@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useVisitorCount } from '../hooks/useVisitorCount'
+import archiveData from '../data/archive.json'
 
 const researchAreas = [
   {
@@ -38,10 +39,11 @@ const researchAreas = [
 ]
 
 const stats = [
-  { value: '30+', label: '논문 게재' },
-  { value: '5+', label: '특허 등록·출원' },
-  { value: '10+', label: '산학협력 프로젝트' },
-  { value: '2016', label: '연구실 설립' },
+  { value: `${archiveData.papers.length}`, label: '논문' },
+  { value: `${archiveData.books.length}`, label: '저서' },
+  { value: `${archiveData.awards.length}`, label: '수상' },
+  { value: `${archiveData.patents.length}`, label: '특허' },
+  { value: `${archiveData.projects.length}`, label: '프로젝트' },
 ]
 
 export default function Home() {
@@ -62,8 +64,8 @@ export default function Home() {
               <span className="text-indigo-400">Assurance &amp; Software</span>
             </h1>
             <p className="text-slate-300 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl">
-              QUAS Lab은 AI-Native 소프트웨어 공학을 연구합니다. 인공지능을 개발 전 주기에 내재화하여
-              소프트웨어 품질과 생산성을 동시에 혁신하는 것을 목표로 합니다.
+              QUAS Lab은 Quantum · AI · Software의 융합을 통해 연구하고 검증합니다. 
+              소프트웨어 공학을 기반으로 Quantum Software, AI Software의 소프트웨어의 품질과 신뢰성을 체계적으로 검증하는 것을 목표로 합니다.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/research" className="btn-primary text-sm px-5 py-2.5">
@@ -83,7 +85,7 @@ export default function Home() {
       {/* Stats */}
       <section className="border-b border-slate-100 bg-slate-50">
         <div className="section-container py-10">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-0 sm:divide-x sm:divide-slate-200">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-6 sm:gap-0 sm:divide-x sm:divide-slate-200">
             {stats.map((s) => (
               <div key={s.label} className="text-center px-4">
                 <p className="text-3xl font-extrabold text-indigo-600">{s.value}</p>
@@ -92,14 +94,14 @@ export default function Home() {
             ))}
           </div>
           {visitorCount !== null && (
-            <div className="flex items-center justify-end gap-1.5 mt-6 text-sm text-slate-400">
+            <div className="flex items-center justify-center gap-2 mt-8 pt-6 border-t border-slate-200 text-sm text-slate-400">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              오늘 방문자 <span className="font-semibold text-indigo-500">{visitorCount.toLocaleString()}명</span>
+              누적 방문자
+              <span className="font-bold text-indigo-600 text-base">{visitorCount.toLocaleString()}</span>
+              명
             </div>
           )}
         </div>
