@@ -145,8 +145,12 @@ export default function Home() {
       <section className="py-20 bg-indigo-600 text-white">
         <div className="section-container">
           <div className="flex flex-col md:flex-row items-center gap-10">
-            <div className="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 text-4xl font-bold">
-              金
+            <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 bg-white/20">
+              <img
+                src="/assets/pi-profile.svg"
+                alt="Prof. Janghwan Kim"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="text-center md:text-left">
               <p className="text-indigo-200 text-sm font-medium mb-1">Principal Investigator</p>

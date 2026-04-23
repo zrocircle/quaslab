@@ -6,7 +6,7 @@ const education = [
     detail: '소프트웨어 공학 / 인공지능 소프트웨어 검증 / 강화학습 소프트웨어 검증',
   },
   {
-    degree: 'M.S. in in Software Engineering (공학석사)',
+    degree: 'M.S. in Software Engineering (공학석사)',
     institution: 'Hongik University (홍익대학교)',
     period: '2020.3 – 2022.2',
     detail: '소프트웨어 가시화',
@@ -24,7 +24,7 @@ const career = [
     role: '외래교수',
     org: '홍익대학교 소프트웨어융합학과',
     period: '2024.3 – Current',
-    detail: 'SELAB 방장, QUAS Lab 운영, 학부 강의, 산학 연구 수행',
+    detail: 'SELAB 방장, 학부 강의, 산학 연구 수행',
   },
   {
     role: '부팀장',

@@ -3,13 +3,14 @@ import archiveData from '../data/archive.json'
 
 const CATEGORIES = [
   { key: 'all', label: '전체' },
-  { key: 'papers', label: '논문', labelEn: 'Papers' },
-  { key: 'books', label: '저서', labelEn: 'Books' },
-  { key: 'awards', label: '수상', labelEn: 'Awards' },
-  { key: 'patents', label: '특허', labelEn: 'Patents' },
+  { key: 'papers', label: '논문' },
+  { key: 'books', label: '저서' },
+  { key: 'awards', label: '수상' },
+  { key: 'patents', label: '특허' },
+  { key: 'projects', label: '프로젝트' },
 ]
 
-/* ── icon components ── */
+/* ── icons ── */
 function PaperIcon() {
   return (
     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,6 +43,14 @@ function PatentIcon() {
     </svg>
   )
 }
+function ProjectIcon() {
+  return (
+    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>
+  )
+}
 function ExternalLinkIcon() {
   return (
     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,30 +68,67 @@ function DownloadIcon() {
   )
 }
 
-const categoryConfig = {
-  papers: { icon: <PaperIcon />, color: 'indigo', label: '논문' },
-  books: { icon: <BookIcon />, color: 'emerald', label: '저서' },
-  awards: { icon: <AwardIcon />, color: 'amber', label: '수상' },
-  patents: { icon: <PatentIcon />, color: 'violet', label: '특허' },
-}
-
 const colorMap = {
   indigo: { bg: 'bg-indigo-50', text: 'text-indigo-600', border: 'border-indigo-100', badge: 'bg-indigo-100 text-indigo-700' },
   emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-100', badge: 'bg-emerald-100 text-emerald-700' },
   amber: { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-100', badge: 'bg-amber-100 text-amber-700' },
   violet: { bg: 'bg-violet-50', text: 'text-violet-600', border: 'border-violet-100', badge: 'bg-violet-100 text-violet-700' },
+  sky: { bg: 'bg-sky-50', text: 'text-sky-600', border: 'border-sky-100', badge: 'bg-sky-100 text-sky-700' },
 }
 
-/* ── individual card renderers ── */
+const categoryConfig = {
+  papers:   { icon: <PaperIcon />,   color: 'indigo',  label: '논문' },
+  books:    { icon: <BookIcon />,    color: 'emerald', label: '저서' },
+  awards:   { icon: <AwardIcon />,   color: 'amber',   label: '수상' },
+  patents:  { icon: <PatentIcon />,  color: 'violet',  label: '특허' },
+  projects: { icon: <ProjectIcon />, color: 'sky',     label: '프로젝트' },
+}
+
+/* ── paper type / scope badges ── */
+function PaperBadges({ item }) {
+  return (
+    <div className="flex gap-1.5 mb-2">
+      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${
+        item.type === 'journal' ? 'bg-indigo-100 text-indigo-700' : 'bg-purple-100 text-purple-700'
+      }`}>
+        {item.type === 'journal' ? '논문지' : '컨퍼런스'}
+      </span>
+      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${
+        item.scope === 'international' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'
+      }`}>
+        {item.scope === 'international' ? '국제' : '국내'}
+      </span>
+    </div>
+  )
+}
+
+/* ── action buttons ── */
+function ActionButtons({ fileUrl }) {
+  const hasFile = fileUrl && !fileUrl.includes('placeholder') && fileUrl !== ''
+  return (
+    <div className="flex gap-2">
+      <a href={fileUrl || '#'} target="_blank" rel="noopener noreferrer"
+        className={`btn-secondary text-xs ${!hasFile ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}>
+        <ExternalLinkIcon /> View
+      </a>
+      <a href={fileUrl || '#'} download
+        className={`btn-primary text-xs ${!hasFile ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}>
+        <DownloadIcon /> Download
+      </a>
+    </div>
+  )
+}
+
+/* ── cards ── */
 function PaperCard({ item }) {
-  const c = colorMap.indigo
   return (
     <div className="card p-5 sm:p-6">
       <div className="flex flex-col sm:flex-row sm:items-start gap-4">
-        <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${c.bg} ${c.text}`}>
+        <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-indigo-50 text-indigo-600">
           <PaperIcon />
         </div>
         <div className="flex-1 min-w-0">
+          <PaperBadges item={item} />
           <h3 className="font-semibold text-slate-900 text-sm leading-snug mb-1">{item.title}</h3>
           <p className="text-xs text-slate-500 mb-0.5">{item.authors}</p>
           <p className="text-xs font-medium text-indigo-600 mb-3">
@@ -92,9 +138,11 @@ function PaperCard({ item }) {
           {item.abstract && (
             <p className="text-xs text-slate-600 leading-relaxed mb-3 line-clamp-2">{item.abstract}</p>
           )}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {item.tags?.map((t) => <span key={t} className="tag">{t}</span>)}
-          </div>
+          {item.tags?.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {item.tags.map((t) => <span key={t} className="tag">{t}</span>)}
+            </div>
+          )}
           <ActionButtons fileUrl={item.fileUrl} />
         </div>
       </div>
@@ -117,12 +165,12 @@ function BookCard({ item }) {
             {item.publisher}, {item.year}
             {item.isbn && <span className="text-slate-400 font-normal"> · ISBN {item.isbn}</span>}
           </p>
-          {item.description && (
-            <p className="text-xs text-slate-600 leading-relaxed mb-3">{item.description}</p>
+          {item.description && <p className="text-xs text-slate-600 leading-relaxed mb-3">{item.description}</p>}
+          {item.tags?.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {item.tags.map((t) => <span key={t} className={`inline-block px-2.5 py-0.5 text-xs font-medium rounded-full ${c.badge}`}>{t}</span>)}
+            </div>
           )}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {item.tags?.map((t) => <span key={t} className={`inline-block px-2.5 py-0.5 text-xs font-medium rounded-full ${c.badge}`}>{t}</span>)}
-          </div>
           <ActionButtons fileUrl={item.fileUrl} />
         </div>
       </div>
@@ -140,15 +188,13 @@ function AwardCard({ item }) {
         </div>
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-slate-900 text-sm leading-snug mb-1">{item.title}</h3>
-          <p className="text-xs font-medium text-amber-600 mb-3">
-            {item.organization}, {item.year}
-          </p>
-          {item.description && (
-            <p className="text-xs text-slate-600 leading-relaxed mb-3">{item.description}</p>
+          <p className="text-xs font-medium text-amber-600 mb-3">{item.organization}, {item.year}</p>
+          {item.description && <p className="text-xs text-slate-600 leading-relaxed mb-3">{item.description}</p>}
+          {item.tags?.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {item.tags.map((t) => <span key={t} className={`inline-block px-2.5 py-0.5 text-xs font-medium rounded-full ${c.badge}`}>{t}</span>)}
+            </div>
           )}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {item.tags?.map((t) => <span key={t} className={`inline-block px-2.5 py-0.5 text-xs font-medium rounded-full ${c.badge}`}>{t}</span>)}
-          </div>
           <ActionButtons fileUrl={item.fileUrl} />
         </div>
       </div>
@@ -168,19 +214,17 @@ function PatentCard({ item }) {
           <h3 className="font-semibold text-slate-900 text-sm leading-snug mb-1">{item.title}</h3>
           <p className="text-xs text-slate-500 mb-0.5">발명자: {item.inventors}</p>
           <div className="flex flex-wrap gap-x-4 gap-y-0.5 mb-3">
-            <p className="text-xs font-medium text-violet-600">
-              등록번호: {item.registrationNumber}
-            </p>
+            <p className="text-xs font-medium text-violet-600">등록번호: {item.registrationNumber}</p>
             <span className={`inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full ${item.status === '등록' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
               {item.status}
             </span>
           </div>
-          {item.abstract && (
-            <p className="text-xs text-slate-600 leading-relaxed mb-3 line-clamp-2">{item.abstract}</p>
+          {item.abstract && <p className="text-xs text-slate-600 leading-relaxed mb-3 line-clamp-2">{item.abstract}</p>}
+          {item.tags?.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {item.tags.map((t) => <span key={t} className={`inline-block px-2.5 py-0.5 text-xs font-medium rounded-full ${c.badge}`}>{t}</span>)}
+            </div>
           )}
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {item.tags?.map((t) => <span key={t} className={`inline-block px-2.5 py-0.5 text-xs font-medium rounded-full ${c.badge}`}>{t}</span>)}
-          </div>
           <ActionButtons fileUrl={item.fileUrl} />
         </div>
       </div>
@@ -188,44 +232,82 @@ function PatentCard({ item }) {
   )
 }
 
-function ActionButtons({ fileUrl }) {
-  const hasFile = fileUrl && !fileUrl.includes('placeholder')
+function ProjectCard({ item }) {
+  const c = colorMap.sky
   return (
-    <div className="flex gap-2">
-      <a
-        href={fileUrl || '#'}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`btn-secondary text-xs ${!hasFile ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
-        title={hasFile ? '새 탭에서 보기' : '파일 준비 중'}
-      >
-        <ExternalLinkIcon />
-        View
-      </a>
-      <a
-        href={fileUrl || '#'}
-        download
-        className={`btn-primary text-xs ${!hasFile ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
-        title={hasFile ? '파일 다운로드' : '파일 준비 중'}
-      >
-        <DownloadIcon />
-        Download
-      </a>
+    <div className="card p-5 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+        <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${c.bg} ${c.text}`}>
+          <ProjectIcon />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="font-semibold text-slate-900 text-sm leading-snug mb-1">{item.title}</h3>
+          <p className="text-xs font-medium text-sky-600 mb-0.5">{item.organization}</p>
+          <p className="text-xs text-slate-400 mb-3">{item.period}</p>
+          {item.description && <p className="text-xs text-slate-600 leading-relaxed mb-3">{item.description}</p>}
+          {item.tags?.length > 0 && (
+            <div className="flex flex-wrap gap-1.5">
+              {item.tags.map((t) => <span key={t} className={`inline-block px-2.5 py-0.5 text-xs font-medium rounded-full ${c.badge}`}>{t}</span>)}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
 
+/* ── papers section with journal/conference split ── */
+function PapersSection({ items }) {
+  if (!items || items.length === 0) return null
+  const journals = items.filter((p) => p.type === 'journal')
+  const conferences = items.filter((p) => p.type === 'conference')
+
+  return (
+    <section>
+      <div className="flex items-center gap-3 mb-5">
+        <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-indigo-50 text-indigo-600">
+          <PaperIcon />
+        </div>
+        <h2 className="text-lg font-bold text-slate-900">논문</h2>
+        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700">
+          {items.length}
+        </span>
+      </div>
+
+      {journals.length > 0 && (
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-3">
+            <h3 className="text-sm font-bold text-slate-700">논문지</h3>
+            <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">{journals.length}</span>
+          </div>
+          <div className="space-y-4">
+            {journals.map((item) => <PaperCard key={item.id} item={item} />)}
+          </div>
+        </div>
+      )}
+
+      {conferences.length > 0 && (
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <h3 className="text-sm font-bold text-slate-700">컨퍼런스</h3>
+            <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">{conferences.length}</span>
+          </div>
+          <div className="space-y-4">
+            {conferences.map((item) => <PaperCard key={item.id} item={item} />)}
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}
+
+/* ── generic section ── */
 function CategorySection({ catKey, items }) {
   const cfg = categoryConfig[catKey]
   const c = colorMap[cfg.color]
   if (!items || items.length === 0) return null
 
-  const CardComponent = {
-    papers: PaperCard,
-    books: BookCard,
-    awards: AwardCard,
-    patents: PatentCard,
-  }[catKey]
+  const CardComponent = { books: BookCard, awards: AwardCard, patents: PatentCard, projects: ProjectCard }[catKey]
 
   return (
     <section>
@@ -234,56 +316,77 @@ function CategorySection({ catKey, items }) {
           {cfg.icon}
         </div>
         <h2 className="text-lg font-bold text-slate-900">{cfg.label}</h2>
-        <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${c.badge}`}>
-          {items.length}
-        </span>
+        <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${c.badge}`}>{items.length}</span>
       </div>
       <div className="space-y-4">
-        {items.map((item) => (
-          <CardComponent key={item.id} item={item} />
-        ))}
+        {items.map((item) => <CardComponent key={item.id} item={item} />)}
       </div>
     </section>
   )
 }
 
+/* ── filter pill button ── */
+function Pill({ active, onClick, children }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-3 py-1 rounded-full text-xs font-medium transition-colors duration-150 ${
+        active ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+      }`}
+    >
+      {children}
+    </button>
+  )
+}
+
+/* ── main page ── */
 export default function Archive() {
   const [activeTab, setActiveTab] = useState('all')
   const [query, setQuery] = useState('')
+  const [paperType, setPaperType] = useState('all')   // 'all' | 'journal' | 'conference'
+  const [paperScope, setPaperScope] = useState('all') // 'all' | 'international' | 'domestic'
+  const [yearFilter, setYearFilter] = useState('all')
+
+  const allYears = useMemo(() => {
+    const years = new Set(archiveData.papers.map((p) => p.year))
+    return Array.from(years).sort((a, b) => b - a)
+  }, [])
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase()
-    const filterItems = (arr) =>
-      arr.filter((item) => {
-        const searchable = [
-          item.title,
-          item.authors,
-          item.inventors,
-          item.venue,
-          item.publisher,
-          item.organization,
-          ...(item.tags ?? []),
-        ]
-          .filter(Boolean)
-          .join(' ')
-          .toLowerCase()
-        return q === '' || searchable.includes(q)
-      })
+
+    const matchQuery = (item) => {
+      const searchable = [item.title, item.authors, item.inventors, item.venue,
+        item.publisher, item.organization, ...(item.tags ?? [])]
+        .filter(Boolean).join(' ').toLowerCase()
+      return q === '' || searchable.includes(q)
+    }
+
+    const matchYear = (item) => yearFilter === 'all' || String(item.year) === yearFilter
+
+    const papers = archiveData.papers.filter((p) =>
+      matchQuery(p) &&
+      matchYear(p) &&
+      (paperType === 'all' || p.type === paperType) &&
+      (paperScope === 'all' || p.scope === paperScope)
+    )
 
     return {
-      papers: filterItems(archiveData.papers),
-      books: filterItems(archiveData.books),
-      awards: filterItems(archiveData.awards),
-      patents: filterItems(archiveData.patents),
+      papers,
+      books: archiveData.books.filter((i) => matchQuery(i) && matchYear(i)),
+      awards: archiveData.awards.filter((i) => matchQuery(i) && matchYear(i)),
+      patents: archiveData.patents.filter((i) => matchQuery(i)),
+      projects: archiveData.projects.filter((i) => matchQuery(i)),
     }
-  }, [query])
+  }, [query, paperType, paperScope, yearFilter])
 
   const totalCount = Object.values(filtered).reduce((acc, arr) => acc + arr.length, 0)
 
-  const categoriesToShow =
-    activeTab === 'all'
-      ? ['papers', 'books', 'awards', 'patents']
-      : [activeTab]
+  const showPaperFilters = activeTab === 'all' || activeTab === 'papers'
+
+  const categoriesToShow = activeTab === 'all'
+    ? ['papers', 'books', 'awards', 'patents', 'projects']
+    : [activeTab]
 
   return (
     <main className="py-16">
@@ -293,16 +396,14 @@ export default function Archive() {
           <h1 className="section-title">Archive</h1>
           <div className="section-divider" />
           <p className="text-slate-600 max-w-xl leading-relaxed">
-            QUAS Lab의 논문, 저서, 수상, 특허를 조회하고 원문 파일을 다운로드할 수 있습니다.
+            QUAS Lab의 논문, 저서, 수상, 특허, 프로젝트를 조회하고 원문 파일을 다운로드할 수 있습니다.
           </p>
         </div>
 
         {/* Search */}
-        <div className="relative mb-8 max-w-lg">
-          <svg
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
-            fill="none" viewBox="0 0 24 24" stroke="currentColor"
-          >
+        <div className="relative mb-6 max-w-lg">
+          <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
@@ -314,10 +415,8 @@ export default function Archive() {
             className="w-full pl-10 pr-4 py-2.5 text-sm rounded-xl border border-slate-200 bg-white text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-indigo-400 transition"
           />
           {query && (
-            <button
-              onClick={() => setQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
-            >
+            <button onClick={() => setQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -326,21 +425,14 @@ export default function Archive() {
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap gap-2 mb-10 border-b border-slate-100 pb-4">
+        <div className="flex flex-wrap gap-2 mb-4 border-b border-slate-100 pb-4">
           {CATEGORIES.map((cat) => {
-            const count = cat.key === 'all'
-              ? totalCount
-              : (filtered[cat.key]?.length ?? 0)
+            const count = cat.key === 'all' ? totalCount : (filtered[cat.key]?.length ?? 0)
             return (
-              <button
-                key={cat.key}
-                onClick={() => setActiveTab(cat.key)}
+              <button key={cat.key} onClick={() => setActiveTab(cat.key)}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors duration-150 ${
-                  activeTab === cat.key
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
+                  activeTab === cat.key ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`}>
                 {cat.label}
                 <span className={`ml-1.5 text-xs ${activeTab === cat.key ? 'opacity-80' : 'text-slate-400'}`}>
                   {count}
@@ -349,6 +441,47 @@ export default function Archive() {
             )
           })}
         </div>
+
+        {/* Paper filters */}
+        {showPaperFilters && (
+          <div className="flex flex-wrap items-center gap-4 mb-8 p-4 bg-slate-50 rounded-xl border border-slate-100">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-slate-500">구분</span>
+              <div className="flex gap-1">
+                <Pill active={paperType === 'all'} onClick={() => setPaperType('all')}>전체</Pill>
+                <Pill active={paperType === 'journal'} onClick={() => setPaperType('journal')}>논문지</Pill>
+                <Pill active={paperType === 'conference'} onClick={() => setPaperType('conference')}>컨퍼런스</Pill>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-slate-500">범위</span>
+              <div className="flex gap-1">
+                <Pill active={paperScope === 'all'} onClick={() => setPaperScope('all')}>전체</Pill>
+                <Pill active={paperScope === 'international'} onClick={() => setPaperScope('international')}>국제</Pill>
+                <Pill active={paperScope === 'domestic'} onClick={() => setPaperScope('domestic')}>국내</Pill>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-slate-500">연도</span>
+              <select
+                value={yearFilter}
+                onChange={(e) => setYearFilter(e.target.value)}
+                className="text-xs border border-slate-200 rounded-lg px-2.5 py-1 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+              >
+                <option value="all">전체</option>
+                {allYears.map((y) => <option key={y} value={String(y)}>{y}</option>)}
+              </select>
+            </div>
+            {(paperType !== 'all' || paperScope !== 'all' || yearFilter !== 'all') && (
+              <button
+                onClick={() => { setPaperType('all'); setPaperScope('all'); setYearFilter('all') }}
+                className="text-xs text-indigo-500 hover:text-indigo-700 font-medium ml-auto"
+              >
+                필터 초기화
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Content */}
         {totalCount === 0 ? (
@@ -361,9 +494,11 @@ export default function Archive() {
           </div>
         ) : (
           <div className="space-y-14">
-            {categoriesToShow.map((catKey) => (
-              <CategorySection key={catKey} catKey={catKey} items={filtered[catKey]} />
-            ))}
+            {categoriesToShow.map((catKey) =>
+              catKey === 'papers'
+                ? <PapersSection key="papers" items={filtered.papers} />
+                : <CategorySection key={catKey} catKey={catKey} items={filtered[catKey]} />
+            )}
           </div>
         )}
       </div>
